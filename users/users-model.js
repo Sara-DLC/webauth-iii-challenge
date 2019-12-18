@@ -1,4 +1,4 @@
-const db = require('../database/dbConfig.js');//check path
+const db = require('../database/db.config');
 
 module.exports = {
     find,
@@ -9,17 +9,17 @@ module.exports = {
 }
 
 function find () {
-    return db('');
+    return db('users');
 };
 
 function findById (id) {
-    return db('')
+    return db('users')
     .where('id', id)
     .first();
 };
 
 function add(newUser) {
-    return db('')
+    return db('users')
     .insert(newUser)
     .then(ids => {
     return findById(ids[0]);
@@ -27,7 +27,7 @@ function add(newUser) {
 }
 
 function update(changes, id) {
-    return db('')
+    return db('users')
     .where('id' , id)
     .update(changes)
     .then(count => {
@@ -36,7 +36,7 @@ function update(changes, id) {
 };
 
 function remove (id) {
-    return db('')
+    return db('users')
     .where('id' , id)
     .del();
 };
