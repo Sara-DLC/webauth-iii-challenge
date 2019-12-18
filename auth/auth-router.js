@@ -44,8 +44,17 @@ Users.findBy({ username })
 });
 });
 
+
+// router.get('/logout', (req, res) => {
+//     req.session.destroy(error => {
+//         error ? res.status(500).json({ message: "Already logged out"}) 
+//         : res.status(200).json({ message: 'logged out'}) 
+//     });
+// });
+
 function signToken(user) {
     const payload = {
+    id: user.id,
     username: user.username,
     department: user.department
     };
