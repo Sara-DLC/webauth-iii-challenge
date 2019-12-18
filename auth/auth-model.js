@@ -2,6 +2,7 @@ const db = require('../database/db.config');
 
 module.exports = {
     find,
+    findBy,
     findById, 
     add,
     update,
@@ -12,10 +13,13 @@ function find () {
     return db('users');
 };
 
+function findBy(users) {
+    return db('users').where(users);
+}
+
 function findById (id) {
     return db('users')
-    .where('id', id)
-    .first();
+    .where({ id })
 };
 
 function add(newUser) {

@@ -1,12 +1,24 @@
 const jwt = require("jsonwebtoken");
+const secrets = require('../secrets/secrets');
 
-module.exports = (req, res, next) {
+module.exports = (req, res, next) => {
+    const token = req.headers.authorization;
 
+if (token) {
+    jwt.verify(token, secrets.jwtSecret, (error, tokenData) => {
+    if (error){
+        res.status(401).json({ message: "Invalid token"})
+    } else {
+        req.username = tokenData.username;
+        next();
+    }
+    })
 }
+};
 
 
 //role validation middleware
-module.exports = function checkRole(role) {
+function checkRole(role) {
 return function(req, res, next) {
     if (req.token && role === req.token.role) {
     next();
@@ -17,3 +29,4 @@ return function(req, res, next) {
         }
     };
 }
+

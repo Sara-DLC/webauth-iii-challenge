@@ -2,6 +2,7 @@ const db = require('../database/db.config');
 
 module.exports = {
     find,
+    findBy,
     findById, 
     add,
     update,
@@ -9,8 +10,13 @@ module.exports = {
 }
 
 function find () {
-    return db('users');
+    return db('users').select('id', 'username', 'password');
 };
+
+function findBy(user) {
+    return db('users').where(user);
+}
+
 
 function findById (id) {
     return db('users')
@@ -28,7 +34,7 @@ function add(newUser) {
 
 function update(changes, id) {
     return db('users')
-    .where('id' , id)
+    .where({ id })
     .update(changes)
     .then(count => {
     count > 0 ? findById(id) : null
@@ -37,6 +43,6 @@ function update(changes, id) {
 
 function remove (id) {
     return db('users')
-    .where('id' , id)
+    .where({ id })
     .del();
 };
