@@ -2,7 +2,7 @@ const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const Users = require("../users/users-model.js");//check path
+const Users = require("../auth/auth-model");//check path
 
 // for endpoints beginning with /api/auth
 router.post("/register", (req, res) => {
@@ -45,7 +45,7 @@ router.post("/login", (req, res) => {
 function signToken(user) {
     const payload = {
     username: user.username,
-    role: "?", 
+    role: user.department, 
     };
 
     const secret = process.env.JWT_SECRET || "secret";

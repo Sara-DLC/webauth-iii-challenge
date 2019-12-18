@@ -4,8 +4,8 @@ const cors = require('cors');
 
 //import Router path(s)
 
-const  = require();
-const  = require();
+const authRouter = require('../auth/auth-router');
+const usersRouter = require('../users/users-router');
 
 //server
 const server = express();
@@ -16,8 +16,8 @@ server.use(cors());
 
 
 //endpoint(s)
-server.use('/api/);
-server.use('/api/);
+server.use('/api/auth', authRouter);
+server.use('/api/users', usersRouter);
 
 server.get('/', (req, res) => {
   res.send('It works');
